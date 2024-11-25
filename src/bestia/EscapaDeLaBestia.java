@@ -211,8 +211,7 @@ public class EscapaDeLaBestia extends JFrame implements ActionListener, KeyListe
             }
 
             if (gameWon) {
-                //g.setColor(Color.GREEN);
-                //g.drawString("¡Has ganado!", 350, 300);
+            
             	g.drawImage(win, winx, winy, 775, 350, this);
                 g.drawImage(beastImageW, beastWX, beastWY, 200, 300, this);
                 beastX = -100;
@@ -221,9 +220,9 @@ public class EscapaDeLaBestia extends JFrame implements ActionListener, KeyListe
                 beastWY = 400;
                 playerX = -100;
                 playerY = -500;
-             //   wolfwon.stop();
-             //   wolfwon.setFramePosition(0);
-              //  wolfwon.start();
+                wolfwon.stop();
+                wolfwon.setFramePosition(0);
+                wolfwon.start();
             }
 
             if (hasCrucifix && crucifixUses > 0) {
@@ -232,8 +231,7 @@ public class EscapaDeLaBestia extends JFrame implements ActionListener, KeyListe
             }
 
             if (gameOver) {
-                //g.setColor(Color.RED);
-                //g.drawString("¡La bestia te ha atrapado!", 350, 300);
+                
             	g.drawImage(lose, losex, losey, 775, 350, this);
                 g.drawImage(playerDeathImage, playerDX, playerDY, 100, 100, this);
                 playerX = -100;
@@ -254,10 +252,10 @@ public class EscapaDeLaBestia extends JFrame implements ActionListener, KeyListe
 
             // Movimiento de la bestia
             if (beastActive && !beastFrozen) {
-                if (playerX < beastX) beastX -= 2;
-                if (playerX > beastX) beastX += 2;
-                if (playerY < beastY) beastY -= 2;
-                if (playerY > beastY) beastY += 2;
+                if (playerX < beastX) beastX -= 3;
+                if (playerX > beastX) beastX += 3;
+                if (playerY < beastY) beastY -= 3;
+                if (playerY > beastY) beastY += 3;
             }
 
             // Control de tiempo de congelación de la bestia
@@ -359,7 +357,7 @@ public class EscapaDeLaBestia extends JFrame implements ActionListener, KeyListe
             keyX = (int) 800+ areaX; // Posición aleatoria de la llave
             keyY = (int) 425 + areaY; 
             beastX = (int) 1250 + areaX; // Posición inicial de la bestia
-            beastY = (int) 100 + areaY;
+            beastY = (int) 400 + areaY;
             doorX = areaX + 1050; // Posición de la puerta en el nivel 0
             doorY = areaY + 400;
             beastActive = true;
@@ -386,16 +384,12 @@ public class EscapaDeLaBestia extends JFrame implements ActionListener, KeyListe
            moveRight = true;
        }
 
-       // Tomar foto (usar el crucifijo en el nivel 1)
+       // (usar el crucifijo en el nivel 1)
        if (e.getKeyCode() == KeyEvent.VK_Q && hasCrucifix && crucifixUses > 0) {
            useCrucifix();
        }
 
-       // Si el jugador está cerca de la bestia y presiona 'R', tomar una foto de la bestia
-       if (e.getKeyCode() == KeyEvent.VK_R && beastActive && !beastFrozen) {
-           beastFrozen = true;
-           freezeEndTime = System.currentTimeMillis() + 1000; // Congela la bestia por 1 segundo
-       }
+       
    }
 
    private void useCrucifix() {
